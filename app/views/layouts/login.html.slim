@@ -1,0 +1,13 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title WorkAbroad
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'admin-lte', mdeia: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'admin-lte', 'data-turbolinks-track': 'reload'
+  
+  body.hold-transition.login-page
+    = yield
