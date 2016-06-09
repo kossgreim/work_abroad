@@ -1,53 +1,42 @@
 doctype html
-html
+html lang="en" 
   head
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    meta content="width=device-width, initial-scale=1" name="viewport" /
+    meta content="" name="description" /
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     title WorkAbroad
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  body
+    = stylesheet_link_tag    'creative/creative', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'creative/creative', 'data-turbolinks-track': 'reload'
+    /! Custom Fonts
+    link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" /
+    link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" /
+  body#page-top
+    nav#mainNav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        /! Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" 
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.page-scroll href="#page-top"  Start Bootstrap
+        /! Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a.page-scroll href="#about"  About
+            li
+              a.page-scroll href="#services"  Services
+            li
+              a.page-scroll href="#portfolio"  Portfolio
+            li
+              a.page-scroll href="#contact"  Contact
+        /! /.navbar-collapse
+      /! /.container-fluid
     = yield
-
-    doctype html
-    html lang="en" 
-      head
-        meta charset="utf-8" /
-        meta content="IE=edge" http-equiv="X-UA-Compatible" /
-        meta content="width=device-width, initial-scale=1" name="viewport" /
-        meta content="" name="description" /
-        meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
-        title WorkAbroad
-        = csrf_meta_tags
-        = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-        = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-        = stylesheet_link_tag    'creative/creative', media: 'all', 'data-turbolinks-track': 'reload'
-        = javascript_include_tag 'creative/creative', 'data-turbolinks-track': 'reload'
-        /! Custom Fonts
-        link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" /
-        link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" /
-      body#page-top
-        nav#mainNav.navbar.navbar-default.navbar-fixed-top
-          .container-fluid
-            /! Brand and toggle get grouped for better mobile display
-            .navbar-header
-              button.navbar-toggle.collapsed data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button" 
-                span.sr-only Toggle navigation
-                span.icon-bar
-                span.icon-bar
-                span.icon-bar
-              a.navbar-brand.page-scroll href="#page-top"  Start Bootstrap
-            /! Collect the nav links, forms, and other content for toggling
-            #bs-example-navbar-collapse-1.collapse.navbar-collapse
-              ul.nav.navbar-nav.navbar-right
-                li
-                  a.page-scroll href="#about"  About
-                li
-                  a.page-scroll href="#services"  Services
-                li
-                  a.page-scroll href="#portfolio"  Portfolio
-                li
-                  a.page-scroll href="#contact"  Contact
-            /! /.navbar-collapse
-          /! /.container-fluid
-        = yield

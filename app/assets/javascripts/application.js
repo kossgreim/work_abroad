@@ -17,3 +17,4 @@
 //= require ./creative/jquery.easing.min
 //= require ./creative/jquery.magnific-popup
 //= require ./creative/scrollreveal
+//= require ./creative/jquery.fittext
