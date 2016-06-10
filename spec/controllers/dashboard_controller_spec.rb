@@ -4,7 +4,7 @@ RSpec.describe DashboardController, :type => :controller do
 
   describe "GET index" do
     let(:user) {create(:user)}
-    context 'when user signed in' do
+    context 'when user is signed in' do
       before do
         sign_in user
         get :index
