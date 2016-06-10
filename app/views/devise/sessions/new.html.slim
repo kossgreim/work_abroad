@@ -1,5 +1,5 @@
-.login-box
-  .login-logo work abroad
+.login-box	
+  .login-logo Work Abroad
   .login-box-body
     p.login-box-msg Sign in to start your session
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
@@ -10,14 +10,10 @@
         = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'
         span.glyphicon.glyphicon-lock.form-control-feedback
       - if devise_mapping.rememberable?
-        .row
-          .col-xs-8
-            .checkbox.icheck
-              label
-                = f.check_box :remember_me
-                = f.label :remember_me
+      .form-group.has-feedback
+        = f.check_box :remember_me
+        = f.label :remember_me
               
       .col-xs-4
       = f.submit "Log in", class: 'btn btn-primary btn-block btn-flat'
-        
-  = render "devise/shared/links"
+      = render "devise/shared/links"
