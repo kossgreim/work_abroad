@@ -14,8 +14,7 @@ html
       /! Main Header
       header.main-header
         /! Logo
-        a.logo href="index2.html" 
-          /! mini logo for sidebar mini 50x50 pixels
+        = link_to root_path, class: 'logo' do
           span.logo-mini Work Abroad
           span.logo-lg Work Abroad
         /! Header Navbar
@@ -31,8 +30,7 @@ html
                 /! Menu Toggle Button
                 a.dropdown-toggle data-toggle="dropdown" href="#" 
                   /! The user image in the navbar
-                  img.user-image alt=("User Image") src="dist/img/user2-160x160.jpg" /
-                  /! hidden-xs hides the username on small devices so only the image appears.
+                  = image_tag "adminlte2/user2-160x160.jpg", class: 'user-image'
                   span.hidden-xs 
                     = current_user.full_name
                 ul.dropdown-menu
