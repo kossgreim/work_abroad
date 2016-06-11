@@ -36,6 +36,7 @@ gem 'devise'
 gem 'slim-rails'
 gem 'figaro'
 gem 'pundit'
+gem "rolify"
 gem "font-awesome-rails"
 
 group :development, :test do
@@ -44,6 +45,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'rails-controller-testing'
 end
 
 group :test do

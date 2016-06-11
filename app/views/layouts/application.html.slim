@@ -38,8 +38,9 @@ html
                   li.user-header
                     = image_tag "adminlte2/user2-160x160.jpg", class: 'img-circle'
                     p 
-                      = current_user.full_name
-                      |  - Web Developer
+                      = user_full_name(current_user)
+                      |  - 
+                      = user_assigned_roles
                       small Member since Nov. 2012
                   /! Menu Body
                   li.user-body
@@ -66,7 +67,7 @@ html
             .pull-left.image
               = image_tag "adminlte2/user2-160x160.jpg", class: 'img-circle'
             .pull-left.info
-              p Alexander Pierce
+              p = user_full_name(current_user)
               /! Status
               a href="#" 
                 i.fa.fa-circle.text-success
@@ -84,9 +85,9 @@ html
             li.header HEADER
             /! Optionally, you can add icons to the links
             li.active
-              a href="#" 
+              = link_to authenticated_root_path do
                 i.fa.fa-link
-                span Link
+                span = t 'main_menu.dashboard'
             li
               a href="#" 
                 i.fa.fa-link
