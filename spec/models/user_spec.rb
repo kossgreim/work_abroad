@@ -37,11 +37,4 @@ RSpec.describe User, :type => :model do
       expect(build(:user, last_name: long_name))
     end
   end
-
-  describe '#full_name' do
-    let(:user) { build(:user) }
-    it 'joins up first and last name' do
-      expect(user.full_name).to eq("#{user.first_name} #{user.last_name}")
-    end
-  end
 end
