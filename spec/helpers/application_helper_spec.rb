@@ -10,10 +10,10 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(helper.replace_flash_key(:alert)).to eq('danger')
     end
     it 'replaces :notice into "info"' do
-      expect(helper.replace_flash_key(:alert)).to eq('danger')
+      expect(helper.replace_flash_key(:notice)).to eq('info')
     end
     it 'replaces "notice" into "info"' do
-      expect(helper.replace_flash_key(:alert)).to eq('danger')
+      expect(helper.replace_flash_key(:notice)).to eq('info')
     end
     context 'when arg. "key" is not in the list' do
       it 'returns value of "key"' do

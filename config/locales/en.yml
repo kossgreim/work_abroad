@@ -22,3 +22,6 @@
 en:
   main_menu:
     dashboard: 'Dashboard'
+  messsages:
+    user:
+      created: 'User has been successfully created'

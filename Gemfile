@@ -53,6 +53,7 @@ group :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'capybara-email'
+  gem 'database_cleaner'
 end
 
 group :development do
