@@ -49,6 +49,9 @@ RSpec.describe UsersController, :type => :controller do
       end
     end
     context 'when user is not signed in' do
+      before do
+        get :show, params: {id: user}
+      end
       it 'redirects to the sign in path' do
         expect(response).to redirect_to new_user_session_path
       end
@@ -68,7 +71,7 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to render_template :new
       end
       it 'assigns a new User to @user' do
-        expect(assigns(:user)).to eq(User.new)
+        expect(assigns(:user)).to be_a(User)
       end
     end
   end
@@ -91,7 +94,7 @@ RSpec.describe UsersController, :type => :controller do
     context 'with invalid attributes' do
       it 'does not create a new User' do
         expect{
-            post :create, params: {user: attributes_for(:user, emaiL: nil)}
+            post :create, params: {user: attributes_for(:user, email: nil)}
         }.to change(User, :count).by(0)
       end
       it 'renders :new view' do
@@ -107,11 +110,10 @@ RSpec.describe UsersController, :type => :controller do
         sign_in user
         get :edit, params: {id: edited_user}
       end
+      it { is_expected.to render_template :edit }
+
       it "returns http success" do
         expect(response).to have_http_status(:success)
-      end
-      it 'renders :edit view' do
-        expect(response).to render_template :edit
       end
       it 'assigns the requested User to @user' do
         expect(assigns(:user)).to eq(edited_user)
@@ -120,9 +122,20 @@ RSpec.describe UsersController, :type => :controller do
   end
 
   describe "GET update" do
-    xit "returns http success" do
-      get :update
-      expect(response).to have_http_status(:success)
+    let(:updated_user) {create(:user)}
+
+    context 'with valid attributes' do
+      before do
+        sign_in user
+        patch :update, parmas: {id: updated_user}
+      end
+      it 'assigns requested User to @user'
+      it 'updates user attributes'
+      it 'redirects to user preview page'
+    end
+    context 'with invalid attributes' do
+      it 'does not update attributes'
+      it 're-renders :edit view'
     end
   end
 
