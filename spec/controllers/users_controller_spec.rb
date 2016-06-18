@@ -26,9 +26,7 @@ RSpec.describe UsersController, :type => :controller do
       before do
         get :index
       end
-      it 'redirects to sign in path' do
-        expect(response).to redirect_to new_user_session_path
-      end
+      include_examples 'an unauthenticated controller'
     end
   end
 
@@ -52,9 +50,7 @@ RSpec.describe UsersController, :type => :controller do
       before do
         get :show, params: {id: user}
       end
-      it 'redirects to the sign in path' do
-        expect(response).to redirect_to new_user_session_path
-      end
+      include_examples 'an unauthenticated controller'
     end
   end
 
@@ -74,38 +70,52 @@ RSpec.describe UsersController, :type => :controller do
         expect(assigns(:user)).to be_a(User)
       end
     end
+    context 'when user is not signed in' do
+      before do
+        get :new
+      end
+      include_examples 'an unauthenticated controller'
+    end
   end
 
   describe "POST create" do
-    before do
-      sign_in user
+    context 'when user is signed in' do
+      before do
+        sign_in user
+      end
+      context 'with valid attributes' do
+        it 'creates a new User' do
+          expect{
+              post :create, params: {user: attributes_for(:user)}
+          }.to change(User, :count).by(1)
+        end
+        it 'sets successful flash message' do
+          post :create, params: {user: attributes_for(:user)}
+          expect(flash[:notice]).to eq(I18n.t('messages.user.created'))
+        end
+      end
+      context 'with invalid attributes' do
+        it 'does not create a new User' do
+          expect{
+              post :create, params: {user: attributes_for(:user, email: nil)}
+          }.to change(User, :count).by(0)
+        end
+        it 'renders :new view' do
+          post :create, params: {user: attributes_for(:user)}
+        end
+      end
     end
-    context 'with valid attributes' do
-      it 'creates a new User' do
-        expect{
-            post :create, params: {user: attributes_for(:user)}
-        }.to change(User, :count).by(1)
-      end
-      it 'sets successful flash message' do
-        post :create, params: {user: attributes_for(:user)}
-        expect(flash[:notice]).to eq(I18n.t('messages.user.created'))
-      end
-    end
-    context 'with invalid attributes' do
-      it 'does not create a new User' do
-        expect{
-            post :create, params: {user: attributes_for(:user, email: nil)}
-        }.to change(User, :count).by(0)
-      end
-      it 'renders :new view' do
+    context 'when user is not signed in' do
+      before do
         post :create, params: {user: attributes_for(:user)}
       end
+      include_examples 'an unauthenticated controller'
     end
   end
 
   describe "GET edit" do
+    let(:edited_user) {create(:user)}
     context 'when user is signed in' do
-      let(:edited_user) {create(:user)}
       before do
         sign_in user
         get :edit, params: {id: edited_user}
@@ -119,56 +129,76 @@ RSpec.describe UsersController, :type => :controller do
         expect(assigns(:user)).to eq(edited_user)
       end
     end
+    context 'when user is not signed in' do
+      before do
+        get :edit, params: {id: edited_user}
+      end
+      include_examples 'an unauthenticated controller'
+    end
   end
 
   describe "PUT update" do
     let(:updated_user) {create(:user)}
-
-    context 'with valid attributes' do
-      before do
-        sign_in user
-        put :update, params: {id: updated_user.id, user: {first_name: 'Test'}}
+    context 'when user is signed in' do
+      context 'with valid attributes' do
+        before do
+          sign_in user
+          put :update, params: {id: updated_user.id, user: {first_name: 'Test'}}
+        end
+        it 'assigns requested User to @user' do
+          expect(assigns(:user)).to eq(updated_user)
+        end
+        it 'sets successful flash message' do
+          expect(flash[:notice]).to eq(I18n.t('messages.user.updated'))
+        end
+        it 'updates user attributes' do
+          updated_user.reload
+          expect(updated_user.first_name).to eq('Test')
+        end
+        it 'redirects to user preview page' do
+          expect(response).to redirect_to user_path
+        end
       end
-      it 'assigns requested User to @user' do
-        expect(assigns(:user)).to eq(updated_user)
-      end
-      it 'sets successful flash message' do
-        expect(flash[:notice]).to eq(I18n.t('messages.user.updated'))
-      end
-      it 'updates user attributes' do
-        updated_user.reload
-        expect(updated_user.first_name).to eq('Test')
-      end
-      it 'redirects to user preview page' do
-        expect(response).to redirect_to user_path
+      context 'with invalid attributes' do
+        before do
+          sign_in user
+          put :update, params: {id: updated_user.id, user: {first_name: nil}}
+        end
+        it 'does not update attributes' do
+          original_first_name = updated_user.first_name
+          updated_user.reload
+          expect(updated_user.first_name).to eq(original_first_name)
+        end
+        it 're-renders :edit view' do
+          expect(response).to render_template :edit
+        end
       end
     end
-    context 'with invalid attributes' do
+    context 'when user is not signed in' do
       before do
-        sign_in user
-        put :update, params: {id: updated_user.id, user: {first_name: nil}}
+        put :update, params: {id: updated_user.id}
       end
-      it 'does not update attributes' do
-        original_first_name = updated_user.first_name
-        updated_user.reload
-        expect(updated_user.first_name).to eq(original_first_name)
-      end
-      it 're-renders :edit view' do
-        expect(response).to render_template :edit
-      end
+      include_examples 'an unauthenticated controller'
     end
   end
 
   describe "DELETE destroy" do
     let(:delete_user) {create(:user)}
-    before do
-      sign_in user
-      delete :destroy, params: {id: delete_user.id}
-    end
+    context 'when user is signed in' do
+      before do
+        sign_in user
+        delete :destroy, params: {id: delete_user.id}
+      end
 
-    it "deletes a user" do
-      expect(User.find_by_id(delete_user.id)).to be_nil
+      it "deletes a user" do
+        expect(User.find_by_id(delete_user.id)).to be_nil
+      end
+    end
+    context 'when user is not signed in' do
+      before do
+        delete :destroy, params: {id: delete_user.id}
+      end
+      include_examples 'an unauthenticated controller'
     end
   end
-
 end
