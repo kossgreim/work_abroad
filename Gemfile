@@ -38,6 +38,7 @@ gem 'figaro'
 gem 'pundit'
 gem "rolify"
 gem "font-awesome-rails"
+gem 'will_paginate'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,7 +54,6 @@ group :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'capybara-email'
-  gem 'database_cleaner'
 end
 
 group :development do

@@ -1,0 +1,6 @@
+tr
+  td= link_to '#'+user.id.to_s, user_path(user)
+  td= user.first_name
+  td= user.last_name
+  td= user.email
+  td= user_assigned_roles user
