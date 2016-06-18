@@ -25,3 +25,4 @@ en:
   messsages:
     user:
       created: 'User has been successfully created'
+      updated: 'User has been successfully updated'

@@ -121,28 +121,53 @@ RSpec.describe UsersController, :type => :controller do
     end
   end
 
-  describe "GET update" do
+  describe "PUT update" do
     let(:updated_user) {create(:user)}
 
     context 'with valid attributes' do
       before do
         sign_in user
-        patch :update, parmas: {id: updated_user}
+        put :update, params: {id: updated_user.id, user: {first_name: 'Test'}}
       end
-      it 'assigns requested User to @user'
-      it 'updates user attributes'
-      it 'redirects to user preview page'
+      it 'assigns requested User to @user' do
+        expect(assigns(:user)).to eq(updated_user)
+      end
+      it 'sets successful flash message' do
+        expect(flash[:notice]).to eq(I18n.t('messages.user.updated'))
+      end
+      it 'updates user attributes' do
+        updated_user.reload
+        expect(updated_user.first_name).to eq('Test')
+      end
+      it 'redirects to user preview page' do
+        expect(response).to redirect_to user_path
+      end
     end
     context 'with invalid attributes' do
-      it 'does not update attributes'
-      it 're-renders :edit view'
+      before do
+        sign_in user
+        put :update, params: {id: updated_user.id, user: {first_name: nil}}
+      end
+      it 'does not update attributes' do
+        original_first_name = updated_user.first_name
+        updated_user.reload
+        expect(updated_user.first_name).to eq(original_first_name)
+      end
+      it 're-renders :edit view' do
+        expect(response).to render_template :edit
+      end
     end
   end
 
-  describe "GET destroy" do
-    xit "returns http success" do
-      get :destroy
-      expect(response).to have_http_status(:success)
+  describe "DELETE destroy" do
+    let(:delete_user) {create(:user)}
+    before do
+      sign_in user
+      delete :destroy, params: {id: delete_user.id}
+    end
+
+    it "deletes a user" do
+      expect(User.find_by_id(delete_user.id)).to be_nil
     end
   end
 
