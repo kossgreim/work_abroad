@@ -23,6 +23,7 @@ en:
   main_menu:
     dashboard: 'Dashboard'
     users: 'Users'
+    clients: 'Clients'
   messsages:
     user:
       created: 'User has been successfully created'

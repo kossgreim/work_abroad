@@ -1,0 +1,16 @@
+= simple_form_for(@client) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :first_name
+    = f.input :last_name
+    = f.input :email
+    = f.input :phone
+    = f.input :country
+    = f.input :city
+    = f.input :birthday
+    = f.input :occupation
+    = f.input :gender
+
+  .form-actions
+    = f.button :submit

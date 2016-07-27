@@ -92,16 +92,11 @@ html
               = link_to users_path do
                 i.fa.fa-link
                 span = t 'main_menu.users'
-            li.treeview
-              a href="#"
+            li
+              = link_to clients_path do
                 i.fa.fa-link
-                span Multilevel
-                i.fa.fa-angle-left.pull-right
-              ul.treeview-menu
-                li
-                  a href="#"  Link in level 2
-                li
-                  a href="#"  Link in level 2
+                span = t 'main_menu.clients'
+
           /! /.sidebar-menu
         /! /.sidebar
       /! Content Wrapper. Contains page content

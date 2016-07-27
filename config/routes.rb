@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :clients
   devise_for :users, path: 'user', controllers: {
     sessions: 'devise_users/sessions',
     passwords: 'devise_users/passwords',

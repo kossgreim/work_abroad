@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,10 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160610192859) do
+ActiveRecord::Schema.define(version: 20160727170925) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clients", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "country"
+    t.string   "city"
+    t.date     "birthday"
+    t.string   "occupation"
+    t.boolean  "gender"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["birthday"], name: "index_clients_on_birthday", using: :btree
+    t.index ["email"], name: "index_clients_on_email", using: :btree
+    t.index ["first_name"], name: "index_clients_on_first_name", using: :btree
+    t.index ["gender"], name: "index_clients_on_gender", using: :btree
+    t.index ["last_name"], name: "index_clients_on_last_name", using: :btree
+    t.index ["occupation"], name: "index_clients_on_occupation", using: :btree
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"

@@ -39,6 +39,8 @@ gem 'pundit'
 gem "rolify"
 gem "font-awesome-rails"
 gem 'will_paginate'
+gem 'simple_form'
+gem 'country_select'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
