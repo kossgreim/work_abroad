@@ -38,14 +38,4 @@ RSpec.describe ApplicationHelper, :type => :helper do
       expect(helper.user_assigned_roles).to include(',')
     end
   end
-
-  describe '#user_full_name' do
-    let(:user) { build(:user) }
-    it 'joins up first and last name' do
-      expect(user_full_name(user)).to eq("#{user.first_name} #{user.last_name}")
-    end
-    it 'first name and last name seperated by space' do
-      expect(user_full_name(user)).to include(' ')
-    end
-  end
 end
