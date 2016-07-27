@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    passwords: 'users/passwords',
-    registrations: 'users/registrations'
+  devise_for :users, path: 'user', controllers: {
+    sessions: 'devise_users/sessions',
+    passwords: 'devise_users/passwords',
+    registrations: 'devise_users/registrations'
   }
+  resources :users
 
   authenticated :user do
     root 'dashboard#index', as: :authenticated_root

@@ -3,11 +3,8 @@ module ApplicationHelper
     {alert: 'danger', notice: 'info'}[key.to_sym] || key
   end
 
-  def user_assigned_roles
-    current_user.roles.collect(&:name).join(', ')
-  end
-
-  def user_full_name(user)
-    "#{user.first_name} #{user.last_name}"
+  def user_assigned_roles(user=nil)
+    user ||= current_user
+    user.roles.collect(&:name).join(', ')
   end
 end

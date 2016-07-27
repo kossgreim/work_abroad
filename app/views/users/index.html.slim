@@ -1,0 +1,14 @@
+.box
+  .box-header
+    h3.box-title Striped Full Width Table
+  /! /.box-header
+  .box-body.no-padding
+    table.table.table-striped
+      tr
+        th style=("width: 10px")  #
+        th =t 'users.first_name'
+        th =t 'users.last_name'
+        th =t 'users.email'
+        th =t 'users.roles'
+      = render @users
+    = will_paginate @users 
