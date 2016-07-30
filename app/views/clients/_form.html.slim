@@ -10,7 +10,7 @@
     = f.input :city
     = f.input :birthday
     = f.input :occupation
-    = f.input :gender
+    = f.collection_radio_buttons :gender, [[true, t('gender.male')] ,[false, t('gener.female')]], :first, :last
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'btn btn-primary'
