@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Client, type: :model do
-  context 'when has valid factory' do
-    it 'creates a new client' do
-      expect{create(:client)}.to change(Client, :count).by(1)
+  context 'valid when' do
+    it 'has valid factory' do
+      expect(build(:client)).to be_valid
+    end
+    it 'has empty email' do
+      expect(build(:client, email: nil)).to be_valid
     end
   end
   context 'invalid when' do
