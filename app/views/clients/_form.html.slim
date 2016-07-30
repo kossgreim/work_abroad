@@ -6,11 +6,13 @@
     = f.input :last_name
     = f.input :email
     = f.input :phone
-    = f.input :country
+    = f.input :country, only: ["UA"]
     = f.input :city
-    = f.input :birthday
+    = f.input :birthday, start_year: Date.today.year - 90,
+      end_year: Date.today.year - 12, order: [:day, :month, :year]
     = f.input :occupation
     = f.collection_radio_buttons :gender, [[true, t('gender.male')] ,[false, t('gener.female')]], :first, :last
 
   .form-actions
     = f.button :submit, class: 'btn btn-primary'
+    = link_to t('basic.cancel'), :back, class: 'btn btn-default'

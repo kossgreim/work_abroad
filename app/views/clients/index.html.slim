@@ -1,37 +1,28 @@
-h1 Listing clients
+.box
+  .box-header
+    = link_to 'New Client', new_client_path, class: 'btn btn-primary'
 
-table
-  thead
-    tr
-      th First name
-      th Last name
-      th Email
-      th Phone
-      th Country
-      th City
-      th Birthday
-      th Occupation
-      th Gender
-      th
-      th
-      th
+  .box-body.no-padding
+    table.table.table-striped
+      thead
+        th First name
+        th Last name
+        th Phone
+        th Country
+        th City
+        th
+        th
+        th
 
-  tbody
-    - @clients.each do |client|
-      tr
-        td = client.first_name
-        td = client.last_name
-        td = client.email
-        td = client.phone
-        td = client.country
-        td = client.city
-        td = client.birthday
-        td = client.occupation
-        td = client.gender
-        td = link_to 'Show', client
-        td = link_to 'Edit', edit_client_path(client)
-        td = link_to 'Destroy', client, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New Client', new_client_path
+      tbody
+        - @clients.each do |client|
+          tr
+            td = client.first_name
+            td = client.last_name
+            td = client.phone
+            td = client.country
+            td = client.city
+            td = link_to t('basic.show'), client_path(client), class: 'btn btn-xs btn-info'
+            td = link_to t('basic.edit'), edit_client_path(client), class: 'btn btn-xs btn-primary'
+            td = link_to t('basic.destroy'), client, class: 'btn btn-xs btn-danger',
+              data: { confirm: t('basic.act_confirm') }, method: :delete

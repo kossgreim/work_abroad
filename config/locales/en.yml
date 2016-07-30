@@ -20,6 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  basic:
+    edit: 'Edit'
+    show: 'Show'
+    destroy: 'Destroy'
+    act_confirm: 'Are you sure?'
   gender:
     male: 'Male'
     female: 'Female'
@@ -27,6 +32,11 @@ en:
     dashboard: 'Dashboard'
     users: 'Users'
     clients: 'Clients'
+  page:
+    client:
+      index: 'Clients list'
+      edit: 'Edit client'
+      new: 'Creating a new client'
   messsages:
     user:
       created: 'User has been successfully created'
