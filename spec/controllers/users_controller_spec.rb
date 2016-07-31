@@ -67,7 +67,7 @@ RSpec.describe UsersController, :type => :controller do
         expect(response).to render_template :new
       end
       it 'assigns a new User to @user' do
-        expect(assigns(:user)).to be_a(User)
+        expect(assigns(:user)).to be_a_new(User)
       end
     end
     context 'when user is not signed in' do
