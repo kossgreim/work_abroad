@@ -49,6 +49,7 @@ group :development, :test do
   gem 'faker'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
+  gem 'terminal-notifier-guard'
 end
 
 group :test do
