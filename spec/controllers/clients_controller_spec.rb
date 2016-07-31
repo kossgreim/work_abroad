@@ -54,4 +54,28 @@ RSpec.describe ClientsController, type: :controller do
       include_examples 'an unauthenticated controller'
     end
   end
+
+  describe "GET new" do
+    context 'whne user is signed in' do
+      before do
+        sign_in user
+        get :new
+      end
+      it 'returns http success' do
+        expect(response).to have_http_status(:success)
+      end
+      it 'assigns a new client to @client' do
+        expect(assigns(:client)).to be_a_new(Client)
+      end
+      it 'renders :new template' do
+        expect(response).to render_template(:new)
+      end
+    end
+    context 'when users is not signed in' do
+      before do
+        get :new
+      end
+      include_examples 'an unauthenticated controller'
+    end
+  end
 end
